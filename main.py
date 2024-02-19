@@ -31,7 +31,7 @@ if __name__ == '__main__':
     
     p.add_argument('-train', '--train_data_path', type=str, help='~/train dataset.csv', default='Datasets/train_data.csv')
     p.add_argument('-test', '--test_data_path', type=str, help='~/test dataset.csv', default='Datasets/test_data_200_200.csv')
-    p.add_argument('-fe', '--feature', type=str, help='Feature: MonogramComp/BigramComp/MonogramOccur/BigramOccur', default='MonogramOccur')
+    p.add_argument('-f', '--feature', type=str, help='Feature: MonogramComp/BigramComp/MonogramOccur/BigramOccur', default='MonogramOccur')
     p.add_argument('-m', '--model', type=str, help='Classifiers: svm-linear, svm-rbf', default='svm-linear')
     args = p.parse_args()
 
