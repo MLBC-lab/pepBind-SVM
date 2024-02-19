@@ -35,7 +35,7 @@ def generateFeatures(df):
 
     # Generate bigram features for each protein sequence
     df['BigramOccur'] = df['Sequence'].apply(lambda seq: generate_ngram_occurences(seq, 2))
-    print(df.columns)
+    
     return df
 
 def processFeatures(data_path, feature):
@@ -60,4 +60,6 @@ def processFeatures(data_path, feature):
   y_train = feature_df.reset_index().Label
   y_train = np.array(y_train)
 
-  return np.array(X_train), y_train
+  sequences = data_df.reset_index().Sequence
+
+  return np.array(X_train), y_train, sequences
