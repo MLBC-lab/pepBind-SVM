@@ -19,7 +19,7 @@ def generate_ngram_composition(sequence, n):
 
     # Generate all possible n-grams from the set of amino acids.
     ngrams = [''.join(ngram) for ngram in itertools.product(amino_acids, repeat=n)]
-    
+
     # Calculate the composition of each n-gram in the sequence.
     ngram_features = [round(sequence.count(ngram) / len(sequence), 3) for ngram in ngrams]
 
@@ -48,7 +48,7 @@ def generate_ngram_occurences(sequence, n):
     return ngram_features
 
 
-def generateFeatures(df):
+def generate_features(df):
     """
     Generate monogram and bigram features for each protein sequence in a DataFrame.
     
@@ -75,7 +75,7 @@ def generateFeatures(df):
     
     return df
 
-def processFeatures(data_path, feature):
+def process_features(data_path, feature):
   """
     Process features from a given dataset and a specified feature type.
     
@@ -91,24 +91,15 @@ def processFeatures(data_path, feature):
   data_df = data_df.sample(frac = 1)
 
   #generating features
-  feature_df = generateFeatures(data_df)
+  feature_df = generate_features(data_df)
 
   # Select specified features and labels
-  feature_df = data_df[[feature, 'Label']]
-  # feature_df[feature] = feature_df[feature].apply(np.array)
+  feature_df = feature_df[[feature, 'Label','Sequence']].reset_index(drop=True)
   feature_df[feature] = feature_df[feature].apply(np.array)
 
-  feature_df = feature_df.reset_index()
-  feature_df.drop(columns='index', inplace= True)
-
   # Prepare data for training/ testing set
-  X_train = []
-  for i in range(len(feature_df)):
-    X_train.append(feature_df[feature].iloc[i])
+  X_data = feature_df[feature].tolist()
+  label = feature_df['Label'].to_numpy()
+  sequences = feature_df['Sequence'].tolist()
 
-  y_train = feature_df.reset_index().Label
-  y_train = np.array(y_train)
-
-  sequences = data_df.reset_index().Sequence
-
-  return np.array(X_train), y_train, sequences
+  return np.array(X_data), label, sequences

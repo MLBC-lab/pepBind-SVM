@@ -24,15 +24,8 @@ def classifiers(x_train, y_train, x_test,  y_test, train_seq, test_seq, model, a
         Prints the evaluation report including various performance metrics.
     """
     # Initialize lists to store performance metrics
-    accuray = []
-    F1_Score = []
-    AUC = []
-    MCC = []
-    Recall = []
-    CM = np.array([
-        [0, 0],
-        [0, 0],
-    ], dtype=int)
+    accuracy, F1_score, AUC, MCC, recall = 0, 0, 0, 0, 0
+    CM = np.zeros((2, 2), dtype=int)
 
     # Model selection based on the specified model type
     if model == 'svm-rbf':
@@ -48,16 +41,13 @@ def classifiers(x_train, y_train, x_test,  y_test, train_seq, test_seq, model, a
     # Calculating performance metrics
     CM += confusion_matrix(y_test, y_pred)
 
-    accuray.append(accuracy_score(y_test, y_pred))
-    F1_Score.append(f1_score(y_test, y_pred))
-    MCC.append(matthews_corrcoef(y_test, y_pred))
-    Recall.append(recall_score(y_test, y_pred))
+    accuracy = accuracy_score(y_test, y_pred) * 100
+    F1_score = f1_score(y_test, y_pred)
+    MCC = matthews_corrcoef(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
 
     FPR, TPR, _ = roc_curve(y_test, y_proba)
-    roc_auc = auc(FPR, TPR)
-    AUC.append(roc_auc)
-
-    accuray = [_ * 100.0 for _ in accuray]
+    AUC = auc(FPR, TPR)
 
     # Writing prediction to a csv file
     true_val = ["Positive" if label == 1 else "Negative" for label in y_test]
@@ -70,10 +60,10 @@ def classifiers(x_train, y_train, x_test,  y_test, train_seq, test_seq, model, a
     print('{} Evaluation Report {}'.format(' -'*25,' -'*25))
     TN, FP, FN, TP = CM.ravel()
     print('True Negative: {}, False Positive: {}, False Negative: {}, True Positive: {}'.format(TN, FP,FN,TP))
-    print('Accuracy: {0:.4f}%'.format(np.mean(accuray)))
+    print('Accuracy: {0:.2f}%'.format(accuracy))
     print('Sensitivity: {0:.2f}%'.format(((TP) / (TP + FN)) * 100.0))
     print('Specificity: {0:.2f}%'.format(((TN) / (TN + FP)) * 100.0))
-    print('F1_Score: {0:.2f}'.format(np.mean(F1_Score)))
-    print('MCC: {0:.2f}'.format(np.mean(MCC)))
-    print('AUC: {0:.2f}'.format(np.mean(AUC)))
+    print('F1_Score: {0:.2f}'.format(F1_score))
+    print('MCC: {0:.2f}'.format(MCC))
+    print('AUC: {0:.2f}'.format(AUC))
 

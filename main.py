@@ -18,8 +18,8 @@ def main(args):
                       feature extraction method, and classifier model.
     """
     print('Features extraction begins. Be patient! The machine will take some time.')
-    x_train, y_train, train_seq = generateFeatures.processFeatures(args.train_data_path,args.feature)
-    x_test, y_test, test_seq = generateFeatures.processFeatures(args.test_data_path, args.feature)
+    x_train, y_train, train_seq = generateFeatures.process_features(args.train_data_path,args.feature)
+    x_test, y_test, test_seq = generateFeatures.process_features(args.test_data_path, args.feature)
         
     print('Preparing prediction file...')
     predict.classifiers(x_train, y_train, x_test, y_test, train_seq, test_seq, args.model, args)
