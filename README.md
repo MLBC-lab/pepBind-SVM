@@ -16,7 +16,7 @@ user@machine:~$ python main.py
 ```
 #### [1.4] Test Command-line #2: Run on different dataset
 ```console
-user@machine:~$ python main.py -train train_dataset.csv -test test_dataset.csv -f 'MonogramOccur' -m 'svm-linear'
+user@machine:~$ python main.py -train train_dataset.csv -test test_dataset.csv -f ['MonogramOccur'] -m 'svm-linear'
 ```
 
 **Table 1:**  command line element
@@ -24,5 +24,5 @@ user@machine:~$ python main.py -train train_dataset.csv -test test_dataset.csv -
 | ------- | ------------ |
 | -train| Train dataset path  |
 | -test | Test dataset path |
-| -f | Feature name (MonogramComp/BigramComp/MonogramOccur/BigramOccur)|
+| -f | List of features separated by commas: MonogramComp, BigramComp, MonogramOccur, BigramOccur|
 | -m | Model name (svm-rbf/svm-linear)
