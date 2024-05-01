@@ -16,9 +16,12 @@ user@machine:~$ python main.py
 ```
 #### [1.4] Test Command-line #2: Run on different dataset
 ```console
-user@machine:~$ python main.py -train train_dataset.csv -test test_dataset.csv -f ['MonogramOccur'] -m 'svm-linear'
+user@machine:~$ python main.py -train train_dataset.csv -test test_dataset.csv -f 'MonogramOccur' -m 'svm-linear'
 ```
-
+#### [1.5] Test Command-line #2: Run on different dataset with multiple features
+```console
+user@machine:~$ python main.py -train train_dataset.csv -test test_dataset.csv -f 'MonogramOccur,MonogramComp' -m 'svm-linear'
+```
 **Table 1:**  command line element
 | Symbol  | Explanation  |
 | ------- | ------------ |

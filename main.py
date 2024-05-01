@@ -5,6 +5,7 @@ warnings.warn= warn
 import argparse
 import generateFeatures
 import predict
+# import plot_XAI_figures
 
 import numpy as np
 
@@ -24,7 +25,8 @@ def main(args):
     print('Preparing prediction file...')
     predict.classifiers(x_train, y_train, x_test, y_test, train_seq, test_seq, args.model, args)
     
-    
+    # plot_XAI_figures.classifiers(x_train, y_train, x_test, y_test, train_seq, test_seq, args.model, args)
+
 
 if __name__ == '__main__':
     """
