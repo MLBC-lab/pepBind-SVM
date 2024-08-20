@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # Adding command line arguments for the script
     p.add_argument('-train', '--train_data_path', type=str, help='~/train dataset.csv', default='Datasets/train_dataset.csv')
     p.add_argument('-test', '--test_data_path', type=str, help='~/test dataset.csv', default='Datasets/test_dataset.csv')
-    p.add_argument('-f', '--features', type=str, help='List of features separated by commas: MonogramComp, BigramComp, MonogramOccur, BigramOccur', default='MonogramOccur')
+    p.add_argument('-f', '--features', type=str, help='List of features separated by commas: MonogramComp, BigramComp, MonogramOccur, BigramOccur', default='MonogramComp')
     p.add_argument('-m', '--model', type=str, help='Classifiers: svm-linear, svm-rbf', default='svm-linear')
 
     # Parse the arguments
